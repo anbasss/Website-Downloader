@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { FaFacebookSquare } from "react-icons/fa";
 import axios from "axios";
+import { motion } from "framer-motion";
+import AnimatedContainer from "@/components/AnimatedContainer";
 
 interface FacebookVideoData {
   url: string;
@@ -19,6 +21,13 @@ interface FacebookResponse {
   author: string;
   data: FacebookVideoData;
 }
+
+// Animation variants
+const itemVariants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: 10 }
+};
 
 export default function FacebookPage() {
   const [url, setUrl] = useState<string>("");
@@ -85,15 +94,22 @@ export default function FacebookPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 rounded-lg backdrop-blur-xl bg-black/15 z-10 relative border border-gray-800/30">
-      <h1 className="text-3xl font-bold text-center mb-8">
+    <AnimatedContainer>
+      <motion.h1 
+        className="text-3xl font-bold text-center mb-8"
+        variants={itemVariants}
+      >
         <span className="flex items-center justify-center">
           <FaFacebookSquare className="mr-2 text-blue-400" />
           Facebook Video Downloader
         </span>
-      </h1>
+      </motion.h1>
 
-      <form onSubmit={handleDownload} className="mb-8">
+      <motion.form 
+        onSubmit={handleDownload} 
+        className="mb-8"
+        variants={itemVariants}
+      >
         <div className="flex flex-col md:flex-row gap-3">
           <input
             type="text"
@@ -110,22 +126,37 @@ export default function FacebookPage() {
             {loading ? "Processing..." : "Download"}
           </button>
         </div>
-      </form>
+      </motion.form>
 
       {error && (
-        <div className="p-4 mb-6 bg-red-900/30 backdrop-blur-sm border-l-4 border-red-500/70 text-red-100">
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0 }}
+          className="p-4 mb-6 bg-red-900/30 backdrop-blur-sm border-l-4 border-red-500/70 text-red-100"
+        >
           {error}
-        </div>
+        </motion.div>
       )}
 
       {loading && (
-        <div className="flex justify-center items-center py-12">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="flex justify-center items-center py-12"
+        >
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-400/70"></div>
-        </div>
+        </motion.div>
       )}
 
       {videoData && (
-        <div className="bg-black/30 backdrop-blur-md rounded-xl p-6 transition-all duration-300 ease-in-out border border-gray-800/40">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="bg-black/30 backdrop-blur-md rounded-xl p-6 transition-all duration-300 ease-in-out border border-gray-800/40"
+        >
           <div className="flex flex-col md:flex-row gap-6">
             <div className="md:w-1/3 relative">
               <img
@@ -175,13 +206,16 @@ export default function FacebookPage() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       )}
 
-      <div className="text-center mt-10 text-sm text-gray-400/80">
+      <motion.div 
+        className="text-center mt-10 text-sm text-gray-400/80"
+        variants={itemVariants}
+      >
         <p>Enter a valid Facebook video URL to download videos</p>
         <p className="mt-1">Example: https://www.facebook.com/watch?v=1234567890</p>
-      </div>
-    </div>
+      </motion.div>
+    </AnimatedContainer>
   );
 }

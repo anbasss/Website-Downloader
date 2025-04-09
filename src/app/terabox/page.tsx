@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { motion } from 'framer-motion';
 
 interface TeraboxData {
   file_name: string;
@@ -70,16 +71,32 @@ export default function Terabox() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 rounded-lg backdrop-blur-xl bg-black/15 z-10 relative border border-gray-800/30">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="max-w-4xl mx-auto p-6 rounded-lg backdrop-blur-xl bg-black/15 z-10 relative border border-gray-800/30"
+    >
       <ToastContainer position="top-center" theme="dark" />
       
-      <h1 className="text-3xl font-bold text-center mb-8">
+      <motion.h1 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+        className="text-3xl font-bold text-center mb-8"
+      >
         <span className="flex items-center justify-center">
           TeraBox Downloader
         </span>
-      </h1>
+      </motion.h1>
       
-      <form onSubmit={(e) => { e.preventDefault(); handleDownload(); }} className="mb-8">
+      <motion.form 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+        onSubmit={(e) => { e.preventDefault(); handleDownload(); }} 
+        className="mb-8"
+      >
         <div className="flex flex-col md:flex-row gap-3">
           <input
             type="text"
@@ -89,45 +106,77 @@ export default function Terabox() {
             onChange={(e) => setUrl(e.target.value)}
           />
           
-          <button
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
             type="submit"
             disabled={loading}
             className="primary px-6 py-3"
           >
             {loading ? 'Processing...' : 'Download'}
-          </button>
+          </motion.button>
         </div>
-      </form>
+      </motion.form>
 
       {error && (
-        <div className="p-4 mb-6 bg-red-900/30 backdrop-blur-sm border-l-4 border-red-500/70 text-red-100">
+        <motion.div 
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.4 }}
+          className="p-4 mb-6 bg-red-900/30 backdrop-blur-sm border-l-4 border-red-500/70 text-red-100"
+        >
           {error}
-        </div>
+        </motion.div>
       )}
 
       {loading && (
-        <div className="flex justify-center items-center py-12">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="flex justify-center items-center py-12"
+        >
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-400/70"></div>
-        </div>
+        </motion.div>
       )}
 
       {result && (
-        <div className="bg-black/30 backdrop-blur-md rounded-xl p-6 transition-all duration-300 ease-in-out border border-gray-800/40">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="bg-black/30 backdrop-blur-md rounded-xl p-6 transition-all duration-300 ease-in-out border border-gray-800/40"
+        >
           <div className="flex flex-col md:flex-row gap-6">
-            <div className="md:w-1/3">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.4 }}
+              className="md:w-1/3"
+            >
               <img 
                 src={result.thumbnail} 
                 alt={result.file_name} 
                 className="rounded-lg w-full h-auto object-cover shadow-md" 
               />
-            </div>
+            </motion.div>
             
             <div className="md:w-2/3">
-              <h2 className="text-xl font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-300">
+              <motion.h2 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.4 }}
+                className="text-xl font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-300"
+              >
                 {result.file_name}
-              </h2>
+              </motion.h2>
               
-              <div className="mb-6 text-gray-300">
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4, duration: 0.4 }}
+                className="mb-6 text-gray-300"
+              >
                 <div className="grid grid-cols-2 gap-2 text-sm">
                   <div className="col-span-1 font-medium">File ID:</div>
                   <div className="col-span-1">{result.file_id}</div>
@@ -135,14 +184,21 @@ export default function Terabox() {
                   <div className="col-span-1 font-medium">Size:</div>
                   <div className="col-span-1">{result.size} ({formatBytes(result.bytes)})</div>
                 </div>
-              </div>
+              </motion.div>
               
-              <div className="space-y-3">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.4 }}
+                className="space-y-3"
+              >
                 <h3 className="text-lg font-medium mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 to-blue-200">
                   Download Options
                 </h3>
                 
-                <a
+                <motion.a
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   href={result.download}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -161,23 +217,28 @@ export default function Terabox() {
                       clipRule="evenodd"
                     />
                   </svg>
-                </a>
+                </motion.a>
                 
                 <div className="text-xs text-gray-500 mt-3 dark:text-gray-400">
                   If the download doesn't start automatically, right-click the button and select "Save link as..."
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
-        </div>
+        </motion.div>
       )}
       
-      <div className="text-center mt-10 text-sm text-gray-400/80">
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.8 }}
+        transition={{ delay: 0.6, duration: 0.5 }}
+        className="text-center mt-10 text-sm text-gray-400/80"
+      >
         <p>Enter a valid TeraBox file URL to download your files</p>
         <p className="mt-1">
           Example: https://terabox.com/s/xxxxx or https://1024terabox.com/s/xxxxx
         </p>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
