@@ -19,7 +19,7 @@ const Navbar = () => {
   ];
 
   // Handle navigation with loading indicator
-  const handleNavigation = (href) => {
+  const handleNavigation = (href: string) => {
     if (pathname !== href) {
       setIsNavigating(true);
       router.push(href);
