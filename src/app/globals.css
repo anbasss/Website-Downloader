@@ -3,13 +3,9 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --gradient-1: linear-gradient(to right, #4f46e5, #8b5cf6, #d946ef);
+  --gradient-2: linear-gradient(to right, #0ea5e9, #3b82f6, #6366f1);
+  --gradient-3: linear-gradient(to right, #6d28d9, #8b5cf6, #ec4899);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +15,193 @@
   }
 }
 
+/* Modern animated background */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: white;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Base aurora-like gradient layer */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(45deg, #0D1B2A, #1B263B, #2A1B3D, #0A3D62, #1A535C); /* Gradasi aurora: biru tua, ungu, hijau */
+  background-size: 400% 400%;
+  z-index: -2;
+  animation: auroraWave 20s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+/* Efek bintang berkelap-kelip */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle, rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    radial-gradient(circle, rgba(100, 255, 200, 0.2) 1px, transparent 1px); /* Bintang putih dan hijau neon */
+  background-size: 100px 100px;
+  background-position: 0 0, 50px 50px, 25px 75px;
+  z-index: -1;
+  opacity: 0.7;
+  animation: twinkle 6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+/* Animasi untuk efek aurora */
+@keyframes auroraWave {
+  0% {
+    background-position: 0% 50%;
+    opacity: 1;
+  }
+  50% {
+    background-position: 100% 50%;
+    opacity: 0.9;
+  }
+  100% {
+    background-position: 0% 50%;
+    opacity: 1;
+  }
+}
+
+/* Animasi untuk bintang berkelap-kelip */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  20% {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+  40% {
+    opacity: 0.6;
+    transform: scale(0.95);
+  }
+  60% {
+    opacity: 0.8;
+    transform: scale(1.03);
+  }
+  80% {
+    opacity: 0.65;
+    transform: scale(0.98);
+  }
+}
+
+/* Moving neon border effect for buttons (dipertahankan) */
+@keyframes movingNeonBorder {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Navbar animation (dipertahankan) */
+@keyframes navbarGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  }
+}
+
+nav > div {
+  animation: navbarGlow 4s ease-in-out infinite;
+}
+
+nav a.active {
+  position: relative;
+  overflow: hidden;
+}
+
+nav a.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 2px;
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  border-radius: 2px;
+}
+
+button {
+  border-radius: 9999px;
+  padding: 10px 20px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+@keyframes buttonNeonPulse {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 65, 108, 0.7), 0 0 10px rgba(255, 75, 43, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(255, 65, 108, 0.9), 0 0 20px rgba(255, 75, 43, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(255, 65, 108, 0.7), 0 0 10px rgba(255, 75, 43, 0.5);
+  }
+}
+
+button.primary {
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  color: white;
+  animation: buttonNeonPulse 2s infinite;
+}
+
+button.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(255, 65, 108, 1), 0 0 30px rgba(255, 75, 43, 0.8);
+}
+
+button.secondary {
+  background-color: #2f2f2f;
+  color: #ddd;
+}
+
+button.secondary:hover {
+  background-color: #3a3a3a;
+  box-shadow: 0 0 10px rgba(221, 221, 221, 0.4);
+}
+
+button.primary::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #ff416c, #ff4b2b, #ff416c, #ff0080, #ff4b2b);
+  background-size: 400% 400%;
+  z-index: -1;
+  border-radius: 9999px;
+  animation: movingNeonBorder 3s ease infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+button.primary:hover::before {
+  opacity: 1;
 }
