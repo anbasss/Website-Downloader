@@ -111,13 +111,13 @@ const TiktokDownloader = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="max-w-4xl mx-auto p-6 rounded-lg backdrop-blur-xl bg-black/15 z-10 relative border border-gray-800/30"
+            className="max-w-4xl mx-auto p-4 sm:p-6 rounded-lg backdrop-blur-xl bg-black/15 z-10 relative border border-gray-800/30"
         >
             <motion.h1 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
-                className="text-3xl font-bold text-center mb-8"
+                className="text-2xl sm:text-3xl font-bold text-center mb-6 sm:mb-8"
             >
                 <span className="flex items-center justify-center">
                     <FaTiktok className="mr-2" />
@@ -130,7 +130,7 @@ const TiktokDownloader = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.5 }}
                 onSubmit={handleSubmit}
-                className="mb-8"
+                className="mb-6 sm:mb-8"
             >
                 <div className="flex flex-col md:flex-row gap-3">
                     <input
@@ -138,14 +138,14 @@ const TiktokDownloader = () => {
                         value={url}
                         onChange={(e) => setUrl(e.target.value)}
                         placeholder="Paste TikTok video URL here..."
-                        className="flex-1 px-4 py-3 border border-gray-700/50 bg-black/30 text-white backdrop-blur-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500/50 transition-all"
+                        className="flex-1 px-3 sm:px-4 py-2 sm:py-3 border border-gray-700/50 bg-black/30 text-white backdrop-blur-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500/50 transition-all"
                     />
                     <motion.button
                         whileHover={{ scale: 1.03 }}
                         whileTap={{ scale: 0.97 }}
                         type="submit"
                         disabled={loading}
-                        className="primary px-6 py-3"
+                        className="primary px-4 sm:px-6 py-2 sm:py-3 mt-2 md:mt-0"
                     >
                         {loading ? "Processing..." : "Download"}
                     </motion.button>
@@ -157,7 +157,7 @@ const TiktokDownloader = () => {
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.4 }}
-                    className="p-4 mb-6 bg-red-900/30 backdrop-blur-sm border-l-4 border-red-500/70 text-red-100"
+                    className="p-3 sm:p-4 mb-6 bg-red-900/30 backdrop-blur-sm border-l-4 border-red-500/70 text-red-100 text-sm sm:text-base"
                 >
                     {error}
                 </motion.div>
@@ -168,9 +168,9 @@ const TiktokDownloader = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="flex justify-center items-center py-12"
+                    className="flex justify-center items-center py-8 sm:py-12"
                 >
-                    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-pink-400/70"></div>
+                    <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-t-2 border-b-2 border-pink-400/70"></div>
                 </motion.div>
             )}
 
@@ -179,34 +179,34 @@ const TiktokDownloader = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="bg-black/30 backdrop-blur-md rounded-xl p-6 transition-all duration-300 ease-in-out border border-gray-800/40"
+                    className="bg-black/30 backdrop-blur-md rounded-xl p-4 sm:p-6 transition-all duration-300 ease-in-out border border-gray-800/40"
                 >
-                    <div className="flex flex-col md:flex-row gap-6">
+                    <div className="flex flex-col md:flex-row gap-5 sm:gap-6">
                         <motion.div 
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ delay: 0.2, duration: 0.4 }}
-                            className="md:w-1/3"
+                            className="md:w-1/3 w-full"
                         >
                             <img
                                 src={result.dlink.cover}
                                 alt="Video thumbnail"
-                                className="rounded-lg w-full h-auto object-cover shadow-md"
+                                className="rounded-lg w-full h-auto object-cover shadow-md mx-auto max-w-[240px] md:max-w-none"
                             />
                         </motion.div>
-                        <div className="md:w-2/3">
+                        <div className="md:w-2/3 w-full mt-4 md:mt-0">
                             <motion.div 
                                 initial={{ opacity: 0, y: -10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3, duration: 0.4 }}
-                                className="flex items-center mb-4"
+                                className="flex items-center mb-3 sm:mb-4"
                             >
                                 <img
                                     src={result.dlink.profilePic}
                                     alt={result.nickname || "Creator"}
-                                    className="w-10 h-10 rounded-full mr-3 border border-gray-700/30"
+                                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-full mr-2 sm:mr-3 border border-gray-700/30"
                                 />
-                                <h2 className="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-purple-300">
+                                <h2 className="text-lg sm:text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-purple-300">
                                     {result.nickname || result.username || "TikTok Creator"}
                                 </h2>
                             </motion.div>
@@ -215,7 +215,7 @@ const TiktokDownloader = () => {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 0.4, duration: 0.4 }}
-                                className="text-gray-200 mb-6 line-clamp-3"
+                                className="text-gray-200 mb-4 sm:mb-6 line-clamp-3 text-sm sm:text-base"
                             >
                                 {result.description}
                             </motion.p>
@@ -224,9 +224,9 @@ const TiktokDownloader = () => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.5, duration: 0.4 }}
-                                className="space-y-3"
+                                className="space-y-2 sm:space-y-3"
                             >
-                                <h3 className="text-lg font-medium mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 to-blue-200">
+                                <h3 className="text-base sm:text-lg font-medium mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 to-blue-200">
                                     Download Options
                                 </h3>
 
@@ -235,12 +235,12 @@ const TiktokDownloader = () => {
                                     whileTap={{ scale: 0.98 }}
                                     href={result.dlink.nowm}
                                     download
-                                    className="flex items-center justify-between bg-gradient-to-r from-pink-600/40 to-purple-600/40 text-white px-5 py-3 rounded-lg hover:from-pink-600/60 hover:to-purple-600/60 backdrop-blur-sm transition-all w-full mb-2 border border-pink-500/20"
+                                    className="flex items-center justify-between bg-gradient-to-r from-pink-600/40 to-purple-600/40 text-white px-3 sm:px-5 py-2 sm:py-3 rounded-lg hover:from-pink-600/60 hover:to-purple-600/60 backdrop-blur-sm transition-all w-full mb-2 border border-pink-500/20 text-sm sm:text-base"
                                 >
                                     <span>Download Without Watermark</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className="h-5 w-5"
+                                        className="h-4 w-4 sm:h-5 sm:w-5"
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
                                     >
@@ -257,12 +257,12 @@ const TiktokDownloader = () => {
                                     whileTap={{ scale: 0.98 }}
                                     href={result.dlink.wm}
                                     download
-                                    className="flex items-center justify-between bg-gradient-to-r from-gray-800/40 to-gray-700/40 text-white px-5 py-3 rounded-lg hover:from-gray-800/60 hover:to-gray-700/60 backdrop-blur-sm transition-all w-full mb-2 border border-gray-600/20"
+                                    className="flex items-center justify-between bg-gradient-to-r from-gray-800/40 to-gray-700/40 text-white px-3 sm:px-5 py-2 sm:py-3 rounded-lg hover:from-gray-800/60 hover:to-gray-700/60 backdrop-blur-sm transition-all w-full mb-2 border border-gray-600/20 text-sm sm:text-base"
                                 >
                                     <span>Download With Watermark</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className="h-5 w-5"
+                                        className="h-4 w-4 sm:h-5 sm:w-5"
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
                                     >
@@ -279,12 +279,12 @@ const TiktokDownloader = () => {
                                     whileTap={{ scale: 0.98 }}
                                     href={result.dlink.audio}
                                     download
-                                    className="flex items-center justify-between bg-gradient-to-r from-cyan-600/40 to-blue-600/40 text-white px-5 py-3 rounded-lg hover:from-cyan-600/60 hover:to-blue-600/60 backdrop-blur-sm transition-all w-full border border-cyan-500/20"
+                                    className="flex items-center justify-between bg-gradient-to-r from-cyan-600/40 to-blue-600/40 text-white px-3 sm:px-5 py-2 sm:py-3 rounded-lg hover:from-cyan-600/60 hover:to-blue-600/60 backdrop-blur-sm transition-all w-full border border-cyan-500/20 text-sm sm:text-base"
                                 >
                                     <span>Download Audio Only</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className="h-5 w-5"
+                                        className="h-4 w-4 sm:h-5 sm:w-5"
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
                                     >
@@ -305,13 +305,13 @@ const TiktokDownloader = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.8 }}
                 transition={{ delay: 0.6, duration: 0.5 }}
-                className="text-center mt-10 text-sm text-gray-400/80"
+                className="text-center mt-6 sm:mt-10 text-xs sm:text-sm text-gray-400/80"
             >
                 <p>
                     Enter a valid TikTok video URL to download videos without watermark
                 </p>
                 <p className="mt-1">
-                    Example: https://www.tiktok.com/@username/video/1234567890123456789
+                    Example: https://www.tiktok.com/@username/video/123456789
                 </p>
             </motion.div>
         </motion.div>
