@@ -15,6 +15,7 @@ const Navbar = () => {
     { name: 'Instagram', href: '/instagram' },
     { name: 'Douyin', href: '/douyin' },
     { name: 'Facebook', href: '/facebook' },
+    { name: 'Youtube', href: '/youtube' },
     { name: 'Terabox', href: '/terabox' },
   ];
 
